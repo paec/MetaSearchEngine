@@ -1,0 +1,28 @@
+<html>
+  <head>
+    {% if title %}
+    <title>{{title}} - microblog</title>
+    {% else %} 
+    microblog
+    {% endif %}
+  </head>
+  <body>
+<!-- 
+    <script type="text/javascript">
+    var someJavaScriptVar = JSON.parse('{#{ variable|tojson }#}');
+    console.log(typeof someJavaScriptVar);
+    </script> -->
+
+ {% for key ,value in user.items() %}
+      <h1>Hello, {{key}}!</h1>
+{%  endfor  %}                     
+
+<h1>Hello, {{user.nickname}}!</h1>
+
+  </body>
+</html>
+
+
+{% for item in searchresult %}
+<div> {{ item }} </div>
+{% endfor %}

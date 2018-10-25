@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.slim.js"
+    integrity="sha256-fNXJFIlca05BIO2Y5zh1xrShK3ME+/lYZ0j+ChxX2DA="
+    crossorigin="anonymous"></script>
+
+<style type="text/css">
+
+a:hover{
+text-decoration: none;
+}
+
+
+.address{
+    color:green;
+}
+
+a:visited{
+ color:purple;
+}
+
+</style>
+
+
+<script type="text/javascript">
+    
+ $(document).ready(function() {
+
+    $('.title').hover(
+
+    function() {
+    $(this).css('text-decoration', 'underline');
+    },function() {
+    $(this).css('text-decoration', 'none');
+    });
+
+  $('.address').hover(
+
+    function() {
+    $(this).prev( ".title" ).css('text-decoration', 'underline');
+  },function() {
+    $(this).prev( ".title" ).css('text-decoration', 'none');
+  });
+
+
+});   
+
+</script>
+
+
+</head>
+
+
+<div style="margin-top: -30px">
+
+
+<a href="/index">
+
+  <div style=" float:left;margin-left: 2vw;" class="logo" >
+   
+      <div style="font-size:55px;color:#1E90FF; display:inline-block;">M</div>
+      <div style="font-size:55px;color:red ; display:inline-block;">M</div>
+      <div style="font-size:55px;color:#E6B800;display:inline-block;">s</div>
+      <div style="font-size:55px;color:green; display:inline-block;">E</div>
+
+  </div>
+
+</a>
+
+<form action="{{ url_for('metasearch') }}"  method="post" style="float:left;margin-left: 2vw; margin-top: 20px;" >
+
+
+    <div class="input-group mb-3">
+          <input type="text" style = "width:60vw;height: 50px" class="form-control" name="inputvalue"  placeholder="type in something..." value="{{ searchvalue }}" >
+
+          <div class="input-group-append">
+                <button class="btn btn-lg btn-primary" type="submit" style="margin-left: 1vw;">搜尋</button>
+          </div>
+      
+    </div>
+           
+   
+</form>
+
+</div>
+  
+
+<div class="container-fluid" style=" clear: left; padding-top: 5vh;" >
+
+{% for item in searchresult %}
+
+
+
+<div class="card" style="margin-bottom: 50px;">
+
+   <h5 class="card-header">
+    
+
+   <a href="{{ item['href'] }}">
+
+     <div class="title">{{ item['title'] }}</div>
+     <div class="address" style="font-size:0.8em; " >{{ item['href'] }}</div>
+
+   </a>   
+
+  </h5>
+
+  <div class="card-body">
+    <p class="brief" class="card-tex">{{ item['brief'] }}</p>
+  </div>
+
+</div>
+
+
+{% endfor %}
+
+</div>
+
+
+
+</html>
+
+
