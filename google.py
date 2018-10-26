@@ -41,4 +41,4 @@ def crawler(keyword):
 
 
 if __name__ == '__main__':
-    crawler("賴清德")
+    crawler("台南市長")
