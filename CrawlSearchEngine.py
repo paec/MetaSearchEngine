@@ -7,8 +7,6 @@ import codecs
 import bing , google
 
 
-
-
 def crawler(keyword):
 
     searchEngileList =[google,bing]
