@@ -4,21 +4,26 @@ from selenium import webdriver
 from collections import OrderedDict
 import json
 import codecs
-import bing , google
-
+import bing , google , yahoo
+import re
 
 def crawler(keyword):
 
-    searchEngileList =[google,bing]
+    searchEngileList =[google,bing,yahoo]
     searchresult = list()
     hreflist = set()
     repeatlist = list()
 
     for se in searchEngileList:
 
+
         for eachresult in se.crawler(keyword):
 
-            if eachresult["href"] not in hreflist:
+
+            r = re.compile("(?:https?://)?"+eachresult["href"])
+            newlist = list(filter(r.match, hreflist))
+
+            if len(newlist) < 1 :
 
                 print(eachresult["title"])
                 print(eachresult["href"])
@@ -30,9 +35,9 @@ def crawler(keyword):
 
             else:
                 repeatlist.append(eachresult["href"])
-
+                print("repeat se: "+str(se)+eachresult["href"])
         
-    print(len(searchresult))
+    print("non repeat: "+str(len(searchresult)))
 
     for i in repeatlist:
         print(i)
@@ -43,7 +48,7 @@ def crawler(keyword):
 
 if __name__ == '__main__':
 
-    crawler("我是補路")
+    crawler("蔡孟峰")
 
 
     

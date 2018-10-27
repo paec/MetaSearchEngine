@@ -4,6 +4,7 @@ from selenium import webdriver
 from collections import OrderedDict
 import json
 import codecs
+import re
 
 def crawler(keyword):
 
@@ -16,24 +17,38 @@ def crawler(keyword):
 
     parser = BeautifulSoup(res.text,"html.parser")
 
-    searchresultlist = parser.find('ol',class_="searchCenterMiddle").findAll('li',class_=None,recursive=False)
-  
+    searchresultlist = parser.find('ol',class_="searchCenterMiddle").findAll('li',recursive=False)
+    print("yahoo: "+str(len(searchresultlist)))
+
     for sr in searchresultlist:
+
+       eachresult = OrderedDict()
         
-       print(sr.find('h3').text)
+       eachresult['title'] = sr.find('h3').text       
+       # print(eachresult['title'])
+
 
        if sr.find(class_="aUrl") is None:
-        print(sr.find('a')['href'])
+        eachresult['href'] = sr.find('a')['href']
+        # print(eachresult['title'])
        else:
-        print(sr.find(class_="aUrl").text)
+        eachresult['href'] = sr.find(class_="aUrl").text
+        # print(eachresult['title'])
+
 
        if sr.find(class_='options-toggle') is not None:
-        print(sr.find(class_="lh-l").text)
+        eachresult['brief'] = sr.find(class_="lh-l").text
+        # print(eachresult['brief'])
+       else:
+        eachresult['brief'] = ""
+        # print(eachresult['brief'])
 
-       print("----------------------------------")
-    # return searchresult
+       searchresult.append(eachresult)
+
+       # print("---------------------------------------------")
+    return searchresult
 
 
 
 if __name__ == '__main__':
-    crawler("鬥陣特攻")
+    crawler("我是補路")

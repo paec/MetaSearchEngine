@@ -19,7 +19,7 @@ def crawler(keyword):
     # print(res.text)
         
     titlegroup = parser.findAll('li',attrs={'class','b_algo'})
-    print(len(titlegroup))
+    print("bing: "+str(len(titlegroup)))
 
     for t in titlegroup:
 

@@ -19,7 +19,7 @@ def crawler(keyword):
         
     titlegroup = parser.findAll('div',attrs={'class','rc'})
 
-    print(len(titlegroup))
+    print("google: "+str(len(titlegroup)))
 
     for t in titlegroup:
 
@@ -41,4 +41,4 @@ def crawler(keyword):
 
 
 if __name__ == '__main__':
-    crawler("台南市長")
+    crawler("簡立峰")
